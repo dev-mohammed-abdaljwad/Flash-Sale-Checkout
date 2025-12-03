@@ -14,7 +14,10 @@ class WebHookController extends Controller
        
         $payload = $request->validated();
         $result = $this->paymentService->processWebhook($payload);
-        return response()->json($result);
+       return response()->json(
+            $result,
+            $result['http_status'] ?? 200
+        );
         
        
     }
